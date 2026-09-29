@@ -1,0 +1,17 @@
+# Competition data is downloaded locally and is not committed.
+data/
+
+# Local experimental notebooks and scratch work.
+drafts/
+
+# Python and notebook-generated files.
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Local virtual environments and tooling caches.
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
