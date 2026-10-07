@@ -74,16 +74,16 @@ Scores below are the scores printed by each notebook's validation/OOF cells. The
 | Notebook | Main approach | Validation / OOF mean ROC AUC | Output |
 |---|---|---:|---|
 | [1](notebooks/1-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Random Forest with imputation, scaling, and one-hot encoding | **0.8410** | `submission.csv` |
-| [2](notebooks/2-flu-shot-learning-predict-h1n1-and-seasonal-flu%281%29.ipynb) | CatBoost with categorical survey values and a stratified holdout | **0.86980** | `submission.csv` |
-| [3](notebooks/3-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | CatBoost, engineered survey aggregates, and five-fold multilabel CV | **0.86840** | `2flu_shot_submission.csv` |
-| [4](notebooks/4-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Cross-validated CatBoost ensemble with leakage-safe features and blending | **0.86850** | `submission_ensemble.csv` |
-| [5](notebooks/5-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | XGBoost with fold-wise target encoding | **0.85780** | `submission3_xgb_target_enc.csv` |
-| [6](notebooks/6-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | LightGBM binary relevance with multilabel stratification | **0.86709** | `submission_lightgbm_multilabel.csv` |
-| [7](notebooks/7-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Tuned Random Forest with engineered ordinal and missingness features | **0.85810** | `submission4_rf_tuned.csv` |
-| [8](notebooks/8-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Regularized logistic regression baseline | **0.85803** | `submission_logistic_regression.csv` |
-| [9](notebooks/9-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | CatBoost + LightGBM + two logistic models with target-specific OOF weights | **0.86933** | Advanced blend submission |
-| [10](notebooks/10-flu-shot-learning-predict-h1n1-and-seasonalflu.ipynb) | Respondent-level CatBoost/LightGBM/linear blend with OOF selection | **0.86881** | `submission_notebook5_blended.csv` |
-| [11](notebooks/11-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Notebook 9 extended with AUC-aware probability vs rank blending | Run notebook | `submission_notebook11_auc_rank_blend.csv` |
+| [2](notebooks/2-flu-shot-learning-predict-h1n1-and-seasonal-flu%281%29.ipynb) | CatBoost with categorical survey values and a stratified holdout | **0.86980** | `submission2.csv` |
+| [3](notebooks/3-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | CatBoost, engineered survey aggregates, and five-fold multilabel CV | **0.86840** | `submission3.csv` |
+| [4](notebooks/4-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Cross-validated CatBoost ensemble with leakage-safe features and blending | **0.86850** | `submission4.csv` |
+| [5](notebooks/5-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | XGBoost with fold-wise target encoding | **0.85780** | `submission5.csv` |
+| [6](notebooks/6-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | LightGBM binary relevance with multilabel stratification | **0.86709** | `submission6.csv` |
+| [7](notebooks/7-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Tuned Random Forest with engineered ordinal and missingness features | **0.85810** | `submission7.csv` |
+| [8](notebooks/8-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Regularized logistic regression baseline | **0.85803** | `submission8.csv` |
+| [9](notebooks/9-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | CatBoost + LightGBM + two logistic models with target-specific OOF weights | **0.86933** | submission9.csv |
+| [10](notebooks/10-flu-shot-learning-predict-h1n1-and-seasonalflu.ipynb) | Respondent-level CatBoost/LightGBM/linear blend with OOF selection | **0.86881** | `submission10.csv` |
+| [11](notebooks/11-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Notebook 9 extended with AUC-aware probability vs rank blending | Run notebook | `submission11.csv` |
 
 ### Why notebook 11?
 
