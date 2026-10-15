@@ -9,7 +9,7 @@
 
  - Latest submitted leaderboard score: **0.8635**
  - Best recorded local OOF score: **0.86933** in notebook 9
- - Newest experiment: **notebook 11**, an AUC-aware blend that compares probability blending with rank-normalized blending
+ - Newest completed experiments: **notebooks 14 and 15**, selecting a target-specific blend from mean fold AUC and confirming the result with a fresh output run
 
  Local OOF scores are useful for model selection, but they are not leaderboard scores. Always validate the generated CSV before submitting it to DrivenData.
 
@@ -65,7 +65,7 @@ from pathlib import Path
 DATA_DIR = Path("data/raw")
 ```
 
-For Kaggle, attach the dataset and use the mounted path shown in the notebook. Notebook 11 writes `submission_notebook11_auc_rank_blend.csv` and its OOF predictions into an `outputs/` directory.
+For Kaggle, attach the dataset and use the mounted path shown in the notebook. Notebooks 11 through 15 write their submissions and OOF predictions into an `outputs/` directory.
 
 ## Notebook experiments
 
@@ -81,13 +81,29 @@ Scores below are the scores printed by each notebook's validation/OOF cells. The
 | [6](notebooks/6-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | LightGBM binary relevance with multilabel stratification | **0.86709** | `submission6.csv` |
 | [7](notebooks/7-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Tuned Random Forest with engineered ordinal and missingness features | **0.85810** | `submission7.csv` |
 | [8](notebooks/8-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Regularized logistic regression baseline | **0.85803** | `submission8.csv` |
-| [9](notebooks/9-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | CatBoost + LightGBM + two logistic models with target-specific OOF weights | **0.86933** | submission9.csv |
+| [9](notebooks/9-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | CatBoost + LightGBM + two logistic models with target-specific OOF weights | **0.86933** | `submission9.csv`|
 | [10](notebooks/10-flu-shot-learning-predict-h1n1-and-seasonalflu.ipynb) | Respondent-level CatBoost/LightGBM/linear blend with OOF selection | **0.86881** | `submission10.csv` |
 | [11](notebooks/11-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Notebook 9 extended with AUC-aware probability vs rank blending | Run notebook | `submission11.csv` |
+| [12](notebooks/12-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Repeated CatBoost/LightGBM folds with stability-weighted probability and rank blending | **0.86869** | `submission12.csv` |
+| [13](notebooks/13-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Leakage-free two-stage stacking with CatBoost and LightGBM base predictions and a CatBoost meta-model | **0.86896** | `submission13.csv` |
+| [14](notebooks/14-flu-shot-learning-predict-h1n1-and-seasonal-flu.ipynb) | Engineered features with CatBoost, LightGBM, and linear candidates; target-specific probability/rank blending selected by mean fold AUC | **0.86911** | `submission14.csv` |
+| [15](notebooks/15-flu-shot-learning-predict-h1n1-and-seasonal-flu%281%29.ipynb) | Fresh-output rerun of the notebook 14 CatBoost/LightGBM blend with validation-only model selection | **0.86911** | `submission15.csv` |
 
 ### Why notebook 11?
 
 The two tree models and the linear models can produce probabilities on different calibration scales. Notebook 11 evaluates both ordinary probability blends and percentile/rank-normalized blends using only out-of-fold predictions. Since ROC AUC depends on ranking rather than probability calibration, this gives the ensemble another principled candidate without using hidden test labels. The selected target-specific blend is then refit through the existing fold ensemble and written in the exact DrivenData submission format.
+
+### Why notebooks 12 and 13?
+
+Notebook 12 repeats the multilabel cross-validation with different fold seeds and averages the resulting predictions before selecting a probability or rank blend. This reduces dependence on one particular validation split and provides a stability-focused ensemble candidate.
+
+Notebook 13 uses leakage-free two-stage stacking. CatBoost and LightGBM generate out-of-fold base predictions first; those predictions, along with cross-target signals, are then supplied to a second CatBoost model. The meta-model is evaluated with the same validation folds, and its contribution is blended conservatively with the base ensemble using only training labels.
+
+### Why notebooks 14 and 15?
+
+Notebook 14 compares probability and rank blends of CatBoost, LightGBM, and logistic regression predictions using five multilabel-stratified folds. It selects the target-specific blend by mean validation-fold ROC AUC, resulting in a 60/40 CatBoost–LightGBM blend for both targets and a mean fold AUC of **0.86911**. The final predictions are refit through the fold ensemble and saved with matching OOF predictions.
+
+Notebook 15 repeats the same validation-only selection and refit workflow under a separate output name. It produces the same mean fold AUC of **0.86911**, providing a reproducible confirmation and a separate submission artifact rather than introducing a new model family.
 
 ## Project Structure
 
